@@ -133,23 +133,27 @@ kubectl port-forward deployment.apps/guestbook 3000:3000
 
    With the --reference-policy=local option, a copy of the image from IBM Cloud Container Registry is imported into the local cache of the internal registry and made available to the cluster’s projects as an image stream. The --scheduled option sets up periodic importing of the image from IBM Cloud Container Registry into the internal registry. The default frequency is 15 minutes.
 
-- **Launching OpenShift Web Console, Adding new application using Container Image in Developer Perspective, Viewing in Topology View.**
+- **Launching OpenShift Web Console, Adding new application using Container Image in Developer Perspective, Viewing in Topology View, Using Route Link from Topology View to Launch App.**
 
-   ![Topology View](/images/og_topology.png)
+  Topology View:
 
-- **Updaing index.html, Building and Pushing Tag using same image, and Using Route Link from Topology View to Launch App.**
+  ![Topology View](/images/og_topology.png)
+
+  Application:
+  
+  ![OpenShift Guestbook App](/images/up-app.png)
+
+- **Updaing index.html, Building and Pushing App using same image tag, and Updating Image Stream**
   ```bash
   docker build . -t us.icr.io/$MY_NAMESPACE/guestbook:v1 && docker push us.icr.io/$MY_NAMESPACE/guestbook:v1
   ```
 
-  ![OpenShift Guestbook App](/images/app_openshift.png)
-
-- **Either wait for 15 minutes for automatic scheduled image import or run following command to update the image.**
+  Either wait for 15 minutes for automatic scheduled image import (--scheduled flag used earlier) or run following command to update the image.
   ```bash
   oc import-image guestbook:v1 --from=us.icr.io/$MY_NAMESPACE/guestbook:v1 --confirm
   ```
 
-  ![OpenShift Image Import](/images/openshift_image_import.png)
+  ![OpenShift Image import](/images/openshift_image_import.png)
 
 - **Viewing Image Streams in Adminstrator Perspective.**
 
@@ -159,9 +163,7 @@ kubectl port-forward deployment.apps/guestbook 3000:3000
 
 - **Relaunching Application using Route Link in Topology View in Developer Perspective**
 
-  ![OpenShift Application Updated Version](/images/openshift_app_updated.png)
-
-  We see 2 entries. This means OpenShift imported our new image
+  ![OpenShift Application Updated Version](/images/app_openshift.png)
   
 ---
 
