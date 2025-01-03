@@ -37,38 +37,55 @@ Ensure you have the following tools installed:
 
 ## Implementation
 
-### 1. Building the Docker Image and Pushing to IBM Cloud Container Registry
-Navigate to the `v1/guestbook` directory and build the Docker image:
+### 1. Building the Guestbook App Docker Image and Pushing to IBM Cloud Container Registry
+
+Exporting namespace as env var, building image, pusing image, verifying image push:
 ```bash
-cd v1/guestbook
 export MY_NAMESPACE=sn-labs-$USERNAME
 docker build . -t us.icr.io/$MY_NAMESPACE/guestbook:v1
-```
-
-Push the image to IBM Cloud Container Registry:
-```bash
 docker push us.icr.io/$MY_NAMESPACE/guestbook:v1
 ```
 
-![Docker Image in IBM Cloud Container Registry](path/to/confirmation-image)
+![Docker Image in IBM Cloud Container Registry](/images/crimages.png)
 
-### 2. Deploying the Application to Kubernetes
-Update the `deployment.yml` file with your namespace:
-```yaml
-image: us.icr.io/<your-namespace>/guestbook:v1
-```
+### 2. Applying Deployment and Accessing Application By Port Forwarding
 
-Apply the deployment:
 ```bash
 kubectl apply -f deployment.yml
-```
-
-Access the application by forwarding the port:
-```bash
 kubectl port-forward deployment.apps/guestbook 3000:3000
 ```
+![Deployed Application on Kubernetes](/images/app.png)
 
-![Deployed Application on Kubernetes](path/to/kubernetes-deployment-image)
+### 3. Autoscaling using Horizontal Pod Autoscaler (HPA)
+
+Autoscale the Guestbook deployment
+```bash
+kubectl autoscale deployment guestbook --cpu-percent=5 --min=1 --max=10
+```
+
+Status of newly made HPA
+```bash
+kubectl get hpa guestbook
+```
+
+![New HPA](/images/hpa.png)
+
+We see 0 replicas as there is no load on the server
+
+Generating load on the app on the server
+```bash
+kubectl run -i --tty load-generator --rm --image=busybox:1.36.0 --restart=Never /bin/sh -c "while sleep 0.01; do wget -q -O- <app URL>; done"
+```
+
+Observing increasing in pod replicas due to increase in load
+```bash
+kubectl get hpa guestbook --watch
+```
+
+![Increase in Pod Replicas by Autoscaling after Increasing Load on Server](/images/hpa2.png)
+
+### 4. Performing Rolling Updates and Rollbacks on Guestbook Application
+
 
 ### 3. Deploying the Application to OpenShift
 Login to OpenShift Cluster:
