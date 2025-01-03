@@ -39,14 +39,14 @@ Ensure you have the following tools installed:
 
 ### 1. Building the Guestbook App Docker Image and Pushing to IBM Cloud Container Registry
 
-Exporting namespace as env var, building image, pusing image, verifying image push:
-```bash
-export MY_NAMESPACE=sn-labs-$USERNAME
-docker build . -t us.icr.io/$MY_NAMESPACE/guestbook:v1
-docker push us.icr.io/$MY_NAMESPACE/guestbook:v1
-```
+   Exporting namespace as env var, building image, pusing image, verifying image push:
+   ```bash
+   export MY_NAMESPACE=sn-labs-$USERNAME
+   docker build . -t us.icr.io/$MY_NAMESPACE/guestbook:v1
+   docker push us.icr.io/$MY_NAMESPACE/guestbook:v1
+   ```
 
-![Docker Image in IBM Cloud Container Registry](/images/crimages.png)
+   ![Docker Image in IBM Cloud Container Registry](/images/crimages.png)
 
 ### 2. Applying Deployment and Accessing Application By Port Forwarding
 
@@ -64,24 +64,24 @@ kubectl port-forward deployment.apps/guestbook 3000:3000
    ```
 
 - **Status of newly made HPA**
-```bash
-kubectl get hpa guestbook
-```
+   ```bash
+   kubectl get hpa guestbook
+   ```
 
-![New HPA](/images/hpa.png)
+   ![New HPA](/images/hpa.png)
 
 
-Generating load on the app on the server
-```bash
-kubectl run -i --tty load-generator --rm --image=busybox:1.36.0 --restart=Never /bin/sh -c "while sleep 0.01; do wget -q -O- <app URL>; done"
-```
+- **Generating load on the app on the server**
+   ```bash
+   kubectl run -i --tty load-generator --rm --image=busybox:1.36.0 --restart=Never /bin/sh -c "while sleep 0.01; do wget -q -O- <app URL>; done"
+   ```
 
-Observing increasing in pod replicas due to increase in load
-```bash
-kubectl get hpa guestbook --watch
-```
+- **Observing increasing in pod replicas due to increase in load**
+   ```bash
+   kubectl get hpa guestbook --watch
+   ```
 
-![Increase in Pod Replicas by Autoscaling after Increasing Load on Server](/images/hpa2.png)
+   ![Increase in Pod Replicas by Autoscaling after Increasing Load on Server](/images/hpa2.png)
 
 ### 4. Performing Rolling Updates and Rollbacks on Guestbook Application
 
