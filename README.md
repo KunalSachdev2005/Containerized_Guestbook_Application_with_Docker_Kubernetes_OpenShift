@@ -58,19 +58,18 @@ kubectl port-forward deployment.apps/guestbook 3000:3000
 
 ### 3. Autoscaling using Horizontal Pod Autoscaler (HPA)
 
-Autoscale the Guestbook deployment
-```bash
-kubectl autoscale deployment guestbook --cpu-percent=5 --min=1 --max=10
-```
+- **Autoscale the Guestbook deployment**
+   ```bash
+   kubectl autoscale deployment guestbook --cpu-percent=5 --min=1 --max=10
+   ```
 
-Status of newly made HPA
+- **Status of newly made HPA**
 ```bash
 kubectl get hpa guestbook
 ```
 
 ![New HPA](/images/hpa.png)
 
-We see 0 replicas as there is no load on the server
 
 Generating load on the app on the server
 ```bash
