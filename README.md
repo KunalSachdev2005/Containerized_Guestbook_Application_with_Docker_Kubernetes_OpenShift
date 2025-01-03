@@ -39,7 +39,7 @@ Ensure you have the following tools installed:
 
 ### 1. Building the Guestbook App Docker Image and Pushing to IBM Cloud Container Registry
 
-   Exporting namespace as env var, building image, pusing image, verifying image push:
+- **Exporting namespace as env var, building image, pusing image, verifying image push**
    ```bash
    export MY_NAMESPACE=sn-labs-$USERNAME
    docker build . -t us.icr.io/$MY_NAMESPACE/guestbook:v1
@@ -84,6 +84,25 @@ kubectl port-forward deployment.apps/guestbook 3000:3000
    ![Increase in Pod Replicas by Autoscaling after Increasing Load on Server](/images/hpa2.png)
 
 ### 4. Performing Rolling Updates and Rollbacks on Guestbook Application
+
+- **Changing index.html, building and pushing updated app image**
+  ```bash
+  docker build . -t us.icr.io/$MY_NAMESPACE/guestbook:v1 && docker push us.icr.io/$MY_NAMESPACE/guestbook:v1
+  ```
+
+  ![Pushing Updated App Image](/images/upguestbook.png)
+
+- **Changing resource requests and limits in the deployments.yml from 50 and 20 milli-cores to 5 and 2 milli-cores repectively. Applying the deployment**
+
+  ![Updated Deployment](/images/deployment.png)
+
+- **Port forward again and get Replica Sets**
+
+  ![Get replica sets after updating deployment](/images/rs_before.png)
+
+  We see that a new replica set is created and is running. The previous one is stopped.
+
+  ![Relaunch Application](/images/up-app.png)
 
 
 ### 3. Deploying the Application to OpenShift
