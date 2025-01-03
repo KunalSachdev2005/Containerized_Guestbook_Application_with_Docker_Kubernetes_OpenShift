@@ -216,19 +216,6 @@ kubectl port-forward deployment.apps/guestbook 3000:3000
   oc apply -f redis-slave-service.yaml
   ```
 
-- **Creating Redis slave Deployment, Verifying Deployments and Pods were created, Creating Redis slave Service.**
-  ```bash
-  oc apply -f redis-slave-deployment.yaml
-  oc get deployments
-  oc get pods
-  ```
-
-  ![Redis slave Deployment and Pods](/images/redis_slave_deployment_pods.png)
-
-  ```bash
-  oc apply -f redis-slave-service.yaml
-  ```
-
 - **Adding second version of guestbook app using this GitHub repo, Viewing guestbook deployment in Topology View.**
 
   ![OpenShift Final Deployment](/images/openshift_final_deployment.png)
