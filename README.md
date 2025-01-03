@@ -220,7 +220,7 @@ kubectl port-forward deployment.apps/guestbook 3000:3000
 
 - **Viewing Final Application using Route Link**
 
-  ![OpenShift Application Version 2](/images/openshift_application_v2.png)
+  ![OpenShift Application Version 2](/images/openshift_app_v2.png)
 
 - **Information Endpoint**
 
