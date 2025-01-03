@@ -169,7 +169,7 @@ kubectl port-forward deployment.apps/guestbook 3000:3000
 
 - **Clicking on /info (an information endpoint for the guestbook) on the app web page**
 
-  ![OpenShift In-memory datastore (not redis)](/images/not_redis)
+  ![OpenShift In-memory datastore (not redis)](/images/not_redis.png)
 
   Currently, we have only deployed the guestbook web front end, so it is using in-memory datastore to keep track of the entries. This is not very resilient, however, because any update or even a restart of the Pod will cause the entries to be lost.
 
