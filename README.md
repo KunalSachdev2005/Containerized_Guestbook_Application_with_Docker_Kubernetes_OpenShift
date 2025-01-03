@@ -138,90 +138,10 @@ kubectl port-forward deployment.apps/guestbook 3000:3000
 oc new-project guestbook
 ```
 
-![Original Topology View](/images/og_topology.png)
 
-Deploy the application:
-```bash
-oc new-app us.icr.io/$MY_NAMESPACE/guestbook:v1 --name=guestbook
-```
-
-Expose the application:
-```bash
-oc expose svc/guestbook
-```
-
-Obtain the route URL:
-```bash
-oc get route guestbook
-```
-
-![Deployed Application on OpenShift](path/to/openshift-deployment-image)
-
-### 4. Autoscaling and Monitoring
-**Kubernetes:**
-Enable Horizontal Pod Autoscaler:
-```bash
-kubectl autoscale deployment guestbook --cpu-percent=5 --min=1 --max=10
-```
-
-Monitor the HPA:
-```bash
-kubectl get hpa guestbook --watch
-```
-
-Generate load to observe autoscaling:
-```bash
-kubectl run -i --tty load-generator --rm --image=busybox --restart=Never -- /bin/sh -c "while sleep 0.01; do wget -q -O- http://localhost:3000; done"
-```
-
-![Kubernetes Autoscaling](path/to/kubernetes-autoscaling-image)
-
-**OpenShift:**
-Enable autoscaling:
-```bash
-oc autoscale deployment/guestbook --min=1 --max=10 --cpu-percent=5
-```
-
-View metrics:
-```bash
-oc get hpa guestbook
-```
-
-![OpenShift Autoscaling](path/to/openshift-autoscaling-image)
-
-### 5. Rolling Updates and Rollbacks
-**Kubernetes:**
-1. Modify the `index.html` to include new content.
-2. Rebuild and push the Docker image:
-   ```bash
-   docker build . -t us.icr.io/$MY_NAMESPACE/guestbook:v2
-   docker push us.icr.io/$MY_NAMESPACE/guestbook:v2
-   ```
-3. Update the `deployment.yml` with the new image tag and apply the changes:
-   ```bash
-   kubectl apply -f deployment.yml
-   ```
-
-Rollback to a previous version:
-```bash
-kubectl rollout undo deployment/guestbook --to-revision=1
-```
-
-![Kubernetes Rollback](path/to/kubernetes-rollback-image)
-
-**OpenShift:**
-Update the application image:
-```bash
-oc set image deployment/guestbook guestbook=us.icr.io/$MY_NAMESPACE/guestbook:v2
-```
-
-Rollback to the previous image:
-```bash
-oc rollout undo deployment/guestbook
-```
-
-![OpenShift Rollback](path/to/openshift-rollback-image)
 
 ---
 
-## ![Course Certificate](https://github.com/KunalSachdev2005/Containerized_Guestbook_Application_with_Docker_Kubernetes_OpenShift/blob/main/Introduction_to_Containers_with_Docker_Kubernetes_%26_OpenShift_5U3I6K29W297.pdf)
+## Course Certificate
+
+You can view the course certificate ![here](https://github.com/KunalSachdev2005/Containerized_Guestbook_Application_with_Docker_Kubernetes_OpenShift/blob/main/Introduction_to_Containers_with_Docker_Kubernetes_%26_OpenShift_5U3I6K29W297.pdf)
