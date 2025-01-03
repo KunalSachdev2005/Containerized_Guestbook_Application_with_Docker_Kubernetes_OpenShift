@@ -102,7 +102,27 @@ kubectl port-forward deployment.apps/guestbook 3000:3000
 
   We see that a new replica set is created and is running. The previous one is stopped.
 
+- **Relaunching Application**
+
   ![Relaunch Application](/images/up-app.png)
+
+  We see v2 in Application Title. This means rollout was successful.
+
+- **Checking details of Revision of the deployment rollout**
+  ```bash
+  kubectl rollout history deployments guestbook --revision=2
+  ```
+  
+  ![Details of Revision of Deployment Rollout](/images/rev.png)
+
+- **Undo the Deloyment and Set to Revision 1, Re-check which replica sets are running post rollback**
+  ```bash
+  kubectl rollout undo deployment/guestbook --to-revision=1
+  ```
+
+  ![Replica Sets post rollback](/images/rs.png)
+
+  We see that new replica set is stopped and the original one is running again
 
 
 ### 3. Deploying the Application to OpenShift
