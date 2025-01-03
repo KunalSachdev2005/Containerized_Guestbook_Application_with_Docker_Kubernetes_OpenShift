@@ -4,6 +4,21 @@ This repository contains the Guestbook application project, created as part of t
 
 ---
 
+# Table of Contents
+- Project Overview
+- Features
+- Prerequisites
+- Implementation
+   - Building the Guestbook App Docker Image and Pushing to IBM Cloud Container Registry
+   - Applying Deployment and Accessing Application By Port Forwarding
+   - Autoscaling using Horizontal Pod Autoscaler (HPA)
+   - Performing Rolling Updates and Rollbacks on Guestbook Application
+   - Deploying the Application to OpenShift
+   - Using Redis Master for Storage
+- Course Certificate
+
+---
+
 ## Project Overview
 The Guestbook application is a simple web app with a text input form for users to submit messages. The application demonstrates:
 
