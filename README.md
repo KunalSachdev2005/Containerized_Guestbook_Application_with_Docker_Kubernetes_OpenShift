@@ -91,7 +91,7 @@ kubectl port-forward deployment.apps/guestbook 3000:3000
    kubectl run -i --tty load-generator --rm --image=busybox:1.36.0 --restart=Never /bin/sh -c "while sleep 0.01; do wget -q -O- <app URL>; done"
    ```
 
-- **Observing increasing in pod replicas due to increase in load.**
+- **Observing increase in pod replicas due to increase in load.**
    ```bash
    kubectl get hpa guestbook --watch
    ```
