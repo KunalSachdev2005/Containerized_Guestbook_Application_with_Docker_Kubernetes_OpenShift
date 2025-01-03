@@ -125,16 +125,20 @@ kubectl port-forward deployment.apps/guestbook 3000:3000
   We see that new replica set is stopped and the original one is running again
 
 
-### 3. Deploying the Application to OpenShift
-Login to OpenShift Cluster:
-```bash
-oc login --token=<your-token> --server=<your-openshift-server>
-```
+### 5. Deploying the Application to OpenShift
+- **Image Stream pointing to my image in IBM Cloud Container Registry**
+   ```bash
+   oc tag us.icr.io/$MY_NAMESPACE/guestbook:v1 guestbook:v1 --reference-policy=local --scheduled
+   ```
 
-Create a new project:
+   With the --reference-policy=local option, a copy of the image from IBM Cloud Container Registry is imported into the local cache of the internal registry and made available to the cluster’s projects as an image stream. The --scheduled option sets up periodic importing of the image from IBM Cloud Container Registry into the internal registry. The default frequency is 15 minutes.
+
+- **Launching OpenShift Web Console, Adding new application using Container Image in Developer Perspective, Viewing in Topology View:
 ```bash
 oc new-project guestbook
 ```
+
+![Original Topology View](/images/og_topology.png)
 
 Deploy the application:
 ```bash
