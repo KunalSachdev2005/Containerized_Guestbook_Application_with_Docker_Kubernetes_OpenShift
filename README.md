@@ -165,4 +165,4 @@ oc rollout undo deployment/guestbook
 
 ---
 
-## ![Course Certificate]()
+## ![Course Certificate](Introduction_to_Containers_with_Docker_Kubernetes_&_OpenShift_5U3I6K29W297.png)
