@@ -141,7 +141,7 @@ kubectl port-forward deployment.apps/guestbook 3000:3000
 
   Application:
   
-  ![OpenShift Guestbook App](/images/up-app.png)
+  Forgot to take a photo of the launched application :(
 
 - **Updaing index.html, Building and Pushing App using same image tag, and Updating Image Stream**
   ```bash
@@ -164,6 +164,69 @@ kubectl port-forward deployment.apps/guestbook 3000:3000
 - **Relaunching Application using Route Link in Topology View in Developer Perspective**
 
   ![OpenShift Application Updated Version](/images/app_openshift.png)
+
+### 6. Using Redis Master for Storage
+
+- **Clicking on /info (an information endpoint for the guestbook) on the app web page**
+
+  ![OpenShift In-memory datastore (not redis)](/images/not_redis)
+
+  Currently, we have only deployed the guestbook web front end, so it is using in-memory datastore to keep track of the entries. This is not very resilient, however, because any update or even a restart of the Pod will cause the entries to be lost.
+
+- **Deleting application from Topology View, Creating Redis master Deployment, Verifying Deployments and Pods creation, Creating Redis master Service.**
+  ```bash
+  oc apply -f redis-master-deployment.yaml
+  oc get deployments
+  oc get pods
+  ```
+
+  ![Redis master Deployment and Pods](/images/redis_master_deployment_pods.png)
+
+  ```bash
+  oc apply -f redis-master-service.yaml
+  ```
+
+  Services find the Pods to load balance based on Pod labels. The Pod created in previous step has the labels app=redis and role=master. The selector field of the Service determines which Pods will receive the traffic sent to the Service.
+
+- **Creating Redis slave Deployment, Verifying Deployments and Pods were created, Creating Redis slave Service.**
+  ```bash
+  oc apply -f redis-slave-deployment.yaml
+  oc get deployments
+  oc get pods
+  ```
+
+  ![Redis slave Deployment and Pods](/images/redis_slave_deployment_pods.png)
+
+  ```bash
+  oc apply -f redis-slave-service.yaml
+  ```
+
+- **Creating Redis slave Deployment, Verifying Deployments and Pods were created, Creating Redis slave Service.**
+  ```bash
+  oc apply -f redis-slave-deployment.yaml
+  oc get deployments
+  oc get pods
+  ```
+
+  ![Redis slave Deployment and Pods](/images/redis_slave_deployment_pods.png)
+
+  ```bash
+  oc apply -f redis-slave-service.yaml
+  ```
+
+- **Adding second version of guestbook app using this GitHub repo, Viewing guestbook deployment in Topology View.**
+
+  ![OpenShift Final Deployment](/images/openshift_final_deployment.png)
+
+- **Viewing Final Application using Route Link**
+
+  ![OpenShift Application Version 2](/images/openshift_application_v2.png)
+
+- **Information Endpoint**
+
+  ![OpenShift Application Version 2 information endpoint](/images/openshift_app_v2_info_endpoint.png)
+
+  Now we get information on Redis instead of "In-memory datastore (not redis)" since we're no longer using the in-memory datastore.
   
 ---
 
