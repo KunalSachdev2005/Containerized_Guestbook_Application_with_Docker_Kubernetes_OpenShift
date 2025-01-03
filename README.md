@@ -9,12 +9,12 @@ This repository contains the Guestbook application project, created as part of t
 - [Features](#features)
 - [Prerequisites](#prerequisites)
 - [Implementation](#implementation)
-  - [Building the Guestbook App Docker Image and Pushing to IBM Cloud Container Registry](#building-the-guestbook-app-docker-image-and-pushing-to-ibm-cloud-container-registry)
-  - [Applying Deployment and Accessing Application By Port Forwarding](#applying-deployment-and-accessing-application-by-port-forwarding)
-  - [Autoscaling using Horizontal Pod Autoscaler (HPA)](#autoscaling-using-horizontal-pod-autoscaler-hpa)
-  - [Performing Rolling Updates and Rollbacks on Guestbook Application](#performing-rolling-updates-and-rollbacks-on-guestbook-application)
-  - [Deploying the Application to OpenShift](#deploying-the-application-to-openshift)
-  - [Using Redis Master for Storage](#using-redis-master-for-storage)
+  - [Building the Guestbook App Docker Image and Pushing to IBM Cloud Container Registry](#1-building-the-guestbook-app-docker-image-and-pushing-to-ibm-cloud-container-registry)
+  - [Applying Deployment and Accessing Application By Port Forwarding](#2-applying-deployment-and-accessing-application-by-port-forwarding)
+  - [Autoscaling using Horizontal Pod Autoscaler (HPA)](#3-autoscaling-using-horizontal-pod-autoscaler-hpa)
+  - [Performing Rolling Updates and Rollbacks on Guestbook Application](#4-performing-rolling-updates-and-rollbacks-on-guestbook-application)
+  - [Deploying the Application to OpenShift](#5-deploying-the-application-to-openshift)
+  - [Using Redis Master for Storage](#6-using-redis-master-for-storage)
 - [Course Certificate](#course-certificate)
 
 ---
